@@ -1,14 +1,14 @@
 FROM python:3.5.1-alpine
 MAINTAINER Greg Taylor <gtaylor@gc-taylor.com>
 
-RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org --upgrade pip setuptools wheel
+RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org --trusted-host pypi.python.org --upgrade pip setuptools wheel
 COPY wheeldir /opt/app/wheeldir
 # These are copied and installed first in order to take maximum advantage
 # of Docker layer caching (if enabled).
 COPY *requirements.txt /opt/app/src/
-RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org --use-wheel --no-index --find-links=/opt/app/wheeldir \
+RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org --trusted-host pypi.python.org --use-wheel --no-index --find-links=/opt/app/wheeldir \
     -r /opt/app/src/requirements.txt
-RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org --use-wheel --no-index --find-links=/opt/app/wheeldir \
+RUN pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org --trusted-host pypi.python.org --use-wheel --no-index --find-links=/opt/app/wheeldir \
     -r /opt/app/src/test-requirements.txt
 
 COPY . /opt/app/src/
