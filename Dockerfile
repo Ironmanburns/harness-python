@@ -1,4 +1,4 @@
-FROM python:3.5.1-alpine
+FROM python:3.11-alpine
 MAINTAINER Greg Taylor <gtaylor@gc-taylor.com>
 
 COPY . /opt/app/src/
